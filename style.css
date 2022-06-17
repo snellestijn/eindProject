@@ -2,6 +2,18 @@ body{
     background: blue;
 }
 
+h1 {
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+    color: white;
+}
+h2{
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px 20px white;
+}
+
+
 table {
     background: blue;
     margin-left: auto;
@@ -53,6 +65,8 @@ button{
     border-radius: 80px;
     color:blue;
     font-size: larger;
+    position: absolute;
+    bottom: 50px;
 }
 
 #reset-knop:hover{
@@ -61,6 +75,25 @@ button{
 
 #reset-knop:active{
     font-size: larger;
+}
+
+.players{
+    color:white;
+    position: absolute;
+    bottom: 200px;
+    left:50px;
+}
+
+#player1{
+    border: 0px solid black;
+    padding: 20px;
+    border-radius: 40px;
+}
+
+#player2{
+    border: 0px solid black;
+    padding: 20px;
+    border-radius: 40px;
 }
 
 

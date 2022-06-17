@@ -3,8 +3,13 @@
 <head>
     <link rel="stylesheet" href="./style.css">
     <title>TicTacToe</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+  <H1>TIC-TAC-TOE</H1>
+  <h2 id="gewonnen"></h2>
   <table>
     <tr>
       <td id="11"></td><td id="12"></tdr><td id="13"></td><td id="14"></td>
@@ -40,7 +45,11 @@
       <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(6)">7</button></td>
     </tr>
   </table>
-<button id="reset-knop" type="button" onclick="speelVeldLegen()">RESET</button>
+  <div class="players">
+    <h2 id="player1">Player 1</h2>
+    <h2 id="player2">Player 2</h2>
+  </div>
+  <button id="reset-knop" type="button" onclick="speelVeldLegen()">RESET</button>
 
   <script src="./script.js"></script>
 
