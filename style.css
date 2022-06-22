@@ -1,7 +1,60 @@
+/* algemene instellingen webpagina */
 body{
     background: blue;
 }
 
+/* login scherm */
+.spelers th {
+    padding: 30px;
+    text-shadow: 1px 1px 10px white;
+    font-size:x-large;
+}
+.spelers td {
+    padding: 40px;
+    transition: 0.5s;
+    height: 30px;
+}
+.spelers td:hover{
+    background: rgb(94, 94, 163);
+    font-size: 140%;
+    cursor: pointer;
+}
+.spelers td:active{
+    font-size: 100%;
+}
+#persoon1{
+    background: yellow;
+}
+#persoon2{
+    background: red;
+}
+#bevestig{
+    bottom: 100px;
+    right: 40px;
+    position: fixed;
+    color: blue;
+    border: 0px;
+    margin: 20px;
+    width: 120px;
+    height: 80px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+#bevestig:hover{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    right: 50px;
+    bottom: 90px;
+    background: rgb(76, 76, 226);
+    color:black;
+    font-size: 110%;
+}
+#bevestig:active{
+    font-size: 90%;
+}
+
+/* headers */
 h1 {
     text-align: center;
     font-family:Arial, Helvetica, sans-serif;
@@ -12,16 +65,19 @@ h2{
     color: white;
     text-shadow: 2px 2px 20px white;
 }
-
-
-table {
-    background: blue;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: auto;
-    margin-bottom: auto;
+#gewonnen{
+    position: fixed;
+    top: 60px;
+    left: 600px;
 }
 
+
+/* Speelveld */
+table {
+    background: blue;
+    position: fixed;
+    
+}
 td{
     background: white;
     border: 2px solid blue;
@@ -32,10 +88,14 @@ td{
     color: blue;
     
 }
+
+
 button{
     transition: 0.5s;
 }
 
+
+/* Keuze knoppen */
 .keuze{
     background: white;
     border: 0px;
@@ -44,19 +104,18 @@ button{
     height: 80px;
     border-radius: 5px;
 }
-
-
 .keuze:hover{
     background: rgb(94, 94, 163);
     font-size: 300%;
     color: rgb(41, 0, 0);
     cursor: pointer;
 }
-
 .keuze:active{
     font-size: 100%;
 }
 
+
+/* Reset knop */
 #reset-knop{
     background: white;
     width: 160px;
@@ -68,28 +127,26 @@ button{
     position: absolute;
     bottom: 50px;
 }
-
 #reset-knop:hover{
     font-size: x-large;
 }
-
 #reset-knop:active{
     font-size: larger;
 }
 
+
+/* Players */
 .players{
     color:white;
     position: absolute;
     bottom: 200px;
     left:50px;
 }
-
 #player1{
     border: 0px solid black;
     padding: 20px;
     border-radius: 40px;
 }
-
 #player2{
     border: 0px solid black;
     padding: 20px;
@@ -97,3 +154,22 @@ button{
 }
 
 
+/* paginas */
+#spelen{
+    visibility: hidden;
+    z-index: 9;
+    
+}
+#inloggen{
+    visibility: visible;
+}
+
+.spelers{
+    top: 105px;
+    left: 550px;
+}
+.speelveld{
+    top: 130px;
+    left: 420px;
+    right: 420px;
+}

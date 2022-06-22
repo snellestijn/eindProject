@@ -8,48 +8,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <H1>ConnectFour</H1>
-  <h2 id="gewonnen"></h2>
-  <table>
-    <tr>
-      <td id="11"></td><td id="12"></tdr><td id="13"></td><td id="14"></td>
-      <td id="15"></td><td id="16"></td><td id="17"></td>
-    </tr>
-    <tr>
-      <td id="21"></td><td id="22"></tdr><td id="23"></td><td id="24"></td>
-      <td id="25"></td><td id="26"></td><td id="27"></td>
-    </tr>
-    <tr>
-      <td id="31"></td><td id="32"></tdr><td id="33"></td><td id="34"></td>
-      <td id="35"></td><td id="36"></td><td id="37"></td>
-    </tr>
-    <tr>
-      <td id="41"></td><td id="42"></tdr><td id="43"></td><td id="44"></td>
-      <td id="45"></td><td id="46"></td><td id="47"></td>
-    </tr>
-    <tr>
-      <td id="51"></td><td id="52"></tdr><td id="53"></td><td id="54"></td>
-      <td id="55"></td><td id="56"></td><td id="57"></td>
-    </tr>
-    <tr>
-      <td id="61"></td><td id="62"></tdr><td id="63"></td><td id="64"></td>
-      <td id="65"></td><td id="66"></td><td id="67"></td>
-    </tr>
-    <tr>
-      <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(0)">1</button></td>
-      <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(1)">2</button></td>
-      <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(2)">3</button></td>
-      <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(3)">4</button></td>
-      <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(4)">5</button></td>
-      <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(5)">6</button></td>
-      <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(6)">7</button></td>
-    </tr>
-  </table>
-  <div class="players">
-    <h2 id="player1">Player 1</h2>
-    <h2 id="player2">Player 2</h2>
+  <H1>Connect-Four</H1>
+  
+  <div id="inloggen">
+    <h2>Maak een keuze</h2>
+    <table class="spelers">
+        <th>Player 1</th>
+        <th>Player 2</th>
+      <tr>
+        <td id="persoon1" type="button" onclick="spelerInstellen('persoon1','persoon',1)">person</td>
+        <td id="persoon2" type="button" onclick="spelerInstellen('persoon2','persoon',2)">person</td>
+      </tr>
+      <tr>
+        <td id="random1" type="button" onclick="spelerInstellen('random1','random',1)">easy</td>
+        <td id="random2" type="button" onclick="spelerInstellen('random2','random',2)">easy</td>
+      </tr>
+      <tr>
+        <td id="normal1" type="button" onclick="spelerInstellen('normal1','normal',1)">normal</td>
+        <td id="normal2" type="button" onclick="spelerInstellen('normal2','normal',2)">normal</td>
+      </tr>
+      <tr>
+        <td id="hard1" type="button" onclick="spelerInstellen('hard1','hard',1)">hard</td>
+        <td id="hard2" type="button" onclick="spelerInstellen('hard2','hard',2)">hard</td>
+      </tr>
+      <button id="bevestig" type="button" onclick="confirm()">confirm</button>
+    </table>
   </div>
-  <button id="reset-knop" type="button" onclick="speelVeldLegen()">RESET</button>
+
+
+  <div id="spelen">
+    <h2 id="gewonnen"></h2>
+    <table class="speelveld">
+      <tr>
+        <td id="11"></td><td id="12"></tdr><td id="13"></td><td id="14"></td>
+        <td id="15"></td><td id="16"></td><td id="17"></td>
+      </tr>
+      <tr>
+        <td id="21"></td><td id="22"></tdr><td id="23"></td><td id="24"></td>
+        <td id="25"></td><td id="26"></td><td id="27"></td>
+      </tr>
+      <tr>
+        <td id="31"></td><td id="32"></tdr><td id="33"></td><td id="34"></td>
+        <td id="35"></td><td id="36"></td><td id="37"></td>
+      </tr>
+      <tr>
+        <td id="41"></td><td id="42"></tdr><td id="43"></td><td id="44"></td>
+        <td id="45"></td><td id="46"></td><td id="47"></td>
+      </tr>
+      <tr>
+        <td id="51"></td><td id="52"></tdr><td id="53"></td><td id="54"></td>
+        <td id="55"></td><td id="56"></td><td id="57"></td>
+      </tr>
+      <tr>
+        <td id="61"></td><td id="62"></tdr><td id="63"></td><td id="64"></td>
+        <td id="65"></td><td id="66"></td><td id="67"></td>
+      </tr>
+      <tr>
+        <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(0)">1</button></td>
+        <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(1)">2</button></td>
+        <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(2)">3</button></td>
+        <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(3)">4</button></td>
+        <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(4)">5</button></td>
+        <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(5)">6</button></td>
+        <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(6)">7</button></td>
+      </tr>
+    </table>
+    <div class="players">
+      <h2 id="player1">Player 1</h2>
+      <h2 id="player2">Player 2</h2>
+    </div>
+    <button id="reset-knop" type="button" onclick="speelVeldLegen()">RESET</button>
+  </div>
 
   <script src="./script.js"></script>
 

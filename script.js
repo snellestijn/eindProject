@@ -2,13 +2,46 @@
 speler 1 geel = true
 speler 2 rood = false
 */
+
+// spelers instellen
+let speler1 = ["persoon",false]; // type : aanDeBeurt
+let speler2 = ["persoon",false];
+
 //stel gelijk speler 1 in als beginner
 let speler = false; // <-- speler 2
-veranderSpeler();   // <-- spelers omdraaien
-
 
 //is speelbaar
-speelbaar = true;
+let speelbaar = true
+
+//gewonnen
+let gewonnen = false
+
+
+
+function spelerInstellen(id,soortSpeler,nummerSpeler){
+    if (nummerSpeler == 1){
+    document.getElementById('persoon1').style.background = "white";
+    document.getElementById('random1').style.background = "white";
+    document.getElementById('normal1').style.background = "white";
+    document.getElementById('hard1').style.background = "white";
+    document.getElementById(id).style.background= "yellow";
+    speler1[0] = soortSpeler;
+    } else{
+    document.getElementById('persoon2').style.background = "white";
+    document.getElementById('random2').style.background = "white";
+    document.getElementById('normal2').style.background = "white";
+    document.getElementById('hard2').style.background = "white";
+    document.getElementById(id).style.background= "red";
+    speler2[0] = soortSpeler;
+    }
+}
+function confirm(){
+    document.getElementById('inloggen').style.visibility = "hidden";
+    document.getElementById('spelen').style.visibility = "visible";
+    veranderSpeler();   // <-- spelers omdraaien / eerste beurt
+    
+}
+
 
 //leeg speelveld definieren en het speelveld instellen
 let speelVeld = [
@@ -32,6 +65,7 @@ function speelVeldLegen(){
     }
     document.getElementById("gewonnen").innerHTML = ""
     speelbaar = true;
+    gewonnen = false;
 }
 
 //speler veranderen
@@ -42,14 +76,139 @@ function veranderSpeler(){
         document.getElementById("player1").style.background = "blue";
         document.getElementById("player2").style.color = "black";
         document.getElementById("player1").style.color = "white";
+        speler1[1] = false;
+        speler2[1] = true;
         }
     else {speler = true; //wijzig naar -> speler 1
         document.getElementById("player1").style.background = "yellow";
         document.getElementById("player2").style.background = "blue";
         document.getElementById("player1").style.color = "black";
         document.getElementById("player2").style.color = "white";
+        speler2[1] = false;
+        speler1[1] = true;
         }
+    if (speler1[1]){vakKeuze(speler1);}
+    else {vakKeuze(speler2);}
 }
+
+
+/*  functies voor de algoritmes
+
+easy: computer kiest willekeurig het volgende vakje.
+normal: computer probeert speler te blokkeren.
+hard: computer probeert tactieken toe te passen.
+
+-volledige uitleg is te lezen in de README file
+
+*/
+
+function vakKeuze(speler){
+    speelbaar=false;
+    if (speler[1]){
+        //wanneer handmatig is: gebeurt niks.
+        if (speler[0] == 'persoon'){
+            speelbaar = true;
+            return
+        }
+        if (speler[0] == 'random'){
+            //plek inkleuren op een willekeurige kolom
+            kolom = willekeurigKolom();
+            setTimeout(function(){speelbaar = true;plekInkleuren(kolom);},600);
+            
+        }
+        if (speler[0] == 'normal'){
+            //plek inkleuren op de normal methode
+            
+            setTimeout(function(){speelbaar = true; kolom = normaal(); plekInkleuren(kolom);},600);
+            
+        }
+        if (speler[0] == 'hard'){
+            //plek inkleuren op de hard methode
+        }
+    }
+}
+
+function willekeurigKolom(){
+    kolommen = [0,1,2,3,4,5,6];
+    kolommen.sort(() => Math.random() - 0.5);
+    for (let kol; kol < 7; kol++ ){
+        let kolom = kolommen[kol];
+        if (laagstePlekVinden(kolom) != 0){return kolom;}
+    }
+    return Math.floor(Math.random() * 7)
+}
+
+
+
+function normaal(){
+    spelers = [!speler,speler];
+    for (let get in [0,1]){
+        let s = spelers[get];
+        for (let kolom = 0; kolom < 7; kolom++){
+            let kopie = JSON.parse(JSON.stringify(speelVeld));
+            if (laagstePlekVinden(kolom) == 0){continue;}
+            kopie = vulKolomIn(kopie,s,kolom);
+            if (visueelGewonnen(s,kopie)){return kolom;}
+        }
+    }
+    //anders return een willekeurig kolom
+    return willekeurigKolom();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+function vulKolomIn(veld,speler,kolom){
+    if (speelbaar == false || gewonnen == true){return;}
+    let laagste = laagstePlekVinden(kolom);
+    let id = Object.keys(veld[laagste-1])[kolom];
+    veld[laagste-1][id] = speler;
+    return veld;
+}
+function visueelGewonnen(speler,veld){
+    if (HorizontaalControleren(speler,true,veld) == true ||
+    VerticaalControleren(speler,true,veld) == true ||
+    schuinRechtsControleren(speler,true,veld) == true ||
+    schuinLinksControleren(speler,true,veld) == true){return true;}else{return false;}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //functie om de laagste plek te vinden : kolom = index
 function laagstePlekVinden(kolom){
@@ -63,7 +222,7 @@ function laagstePlekVinden(kolom){
 
 //kleur een plek in op de gegeven kolom
 function plekInkleuren(kolom){
-    if (speelbaar == false){return}
+    if (speelbaar == false || gewonnen == true){return}
     let laagste = laagstePlekVinden(kolom);
     if (laagste == 0){
         alert("Deze rij is vol");}
@@ -78,6 +237,9 @@ function plekInkleuren(kolom){
 
 
 
+
+
+
 /*
 Functies voor het controleren van het speelveld
 stappen:
@@ -88,7 +250,7 @@ stappen:
 */
 
 //controleren van de horizontale rijen
-function HorizontaalControleren(speler){
+function HorizontaalControleren(speler,virtueel,speelVeld){
     for (rij in speelVeld){
         for (let vakje = 0; vakje < 4; vakje++){
             vakjeEen = speelVeld[rij][Object.keys(speelVeld[rij])[vakje]];
@@ -97,7 +259,7 @@ function HorizontaalControleren(speler){
             vakjeVier = speelVeld[rij][Object.keys(speelVeld[rij])[vakje+3]]
             if (vakjeEen == speler && vakjeEen == vakjeTwee && vakjeTwee == 
                 vakjeDrie && vakjeDrie == vakjeVier)
-                {
+                { if (virtueel){return true;}
                 inkleuren(Object.keys(speelVeld[rij])[vakje],Object.keys(speelVeld[rij])[vakje+1],
                     Object.keys(speelVeld[rij])[vakje+2],Object.keys(speelVeld[rij])[vakje+3],
                     speler);
@@ -108,7 +270,7 @@ function HorizontaalControleren(speler){
 }
 
 //controleren van verticale kolommen
-function VerticaalControleren(speler){
+function VerticaalControleren(speler,virtueel,speelVeld){
      for (let rij = 0; rij < 3; rij++){
         for (let vakje = 0; vakje < 7; vakje++){
                 vakjeEen = speelVeld[rij][Object.keys(speelVeld[rij])[vakje]];
@@ -117,7 +279,7 @@ function VerticaalControleren(speler){
                 vakjeVier = speelVeld[rij+3][Object.keys(speelVeld[rij+3])[vakje]];
             if (vakjeEen == speler && vakjeEen == vakjeTwee && vakjeTwee == 
                 vakjeDrie && vakjeDrie == vakjeVier)
-                {
+                { if (virtueel){return true;}
                 inkleuren(Object.keys(speelVeld[rij])[vakje],Object.keys(speelVeld[rij+1])[vakje],
                     Object.keys(speelVeld[rij+2])[vakje],Object.keys(speelVeld[rij+3])[vakje],
                     speler);
@@ -128,7 +290,7 @@ function VerticaalControleren(speler){
 }
 
 //controleren van schuin rechts aflopende mogelijkheden
-function schuinRechtsControleren(speler){
+function schuinRechtsControleren(speler,virtueel,speelVeld){
     for (let rij = 0; rij < 3; rij++){
         for (let vakje = 0; vakje < 4; vakje ++){
                 vakjeEen = speelVeld[rij][Object.keys(speelVeld[rij])[vakje]];
@@ -137,8 +299,8 @@ function schuinRechtsControleren(speler){
                 vakjeVier = speelVeld[rij+3][Object.keys(speelVeld[rij+3])[vakje+3]];
             if (vakjeEen == speler && vakjeEen == vakjeTwee && vakjeTwee == 
                 vakjeDrie && vakjeDrie == vakjeVier)
-                {
-                inkleuren(Object.keys(speelVeld[rij])[vakje],Object.keys(speelVeld[rij+1])[vakje+1],
+                { if (virtueel){return true;}
+                    inkleuren(Object.keys(speelVeld[rij])[vakje],Object.keys(speelVeld[rij+1])[vakje+1],
                     Object.keys(speelVeld[rij+2])[vakje+2],Object.keys(speelVeld[rij+3])[vakje+3],
                     speler);
                 return
@@ -148,7 +310,7 @@ function schuinRechtsControleren(speler){
 }
 
 //controleren van schuin links aflopende mogelijkheden
-function schuinLinksControleren(speler){
+function schuinLinksControleren(speler,virtueel,speelVeld){
     for (let rij = 0; rij < 3; rij++){
         for (let vakje = 3; vakje < 7; vakje ++){
                 vakjeEen = speelVeld[rij][Object.keys(speelVeld[rij])[vakje]];
@@ -157,8 +319,8 @@ function schuinLinksControleren(speler){
                 vakjeVier = speelVeld[rij+3][Object.keys(speelVeld[rij+3])[vakje-3]];
             if (vakjeEen == speler && vakjeEen == vakjeTwee && vakjeTwee == 
                 vakjeDrie && vakjeDrie == vakjeVier)
-                {
-                inkleuren(Object.keys(speelVeld[rij])[vakje],Object.keys(speelVeld[rij+1])[vakje-1],
+                { if (virtueel){return true;}
+                    inkleuren(Object.keys(speelVeld[rij])[vakje],Object.keys(speelVeld[rij+1])[vakje-1],
                     Object.keys(speelVeld[rij+2])[vakje-2],Object.keys(speelVeld[rij+3])[vakje-3],
                     speler);
                 return
@@ -187,10 +349,10 @@ function inkleuren(een,twee,drie,vier,speler){
 
 //algemeen controleren functie
 function controleren(speler){
-    HorizontaalControleren(speler);
-    VerticaalControleren(speler);
-    schuinRechtsControleren(speler);
-    schuinLinksControleren(speler);
+    HorizontaalControleren(speler,false,speelVeld);
+    VerticaalControleren(speler,false,speelVeld);
+    schuinRechtsControleren(speler,false,speelVeld);
+    schuinLinksControleren(speler,false,speelVeld);
 }
 
 //functie voor een gewonnen bericht
@@ -199,6 +361,7 @@ function gewonnenBericht(speler){
     nummer = (speler? "Speler 1": "Speler 2");
     document.getElementById("gewonnen").innerHTML = nummer + " heeft gewonnen!";
     document.getElementById("gewonnen").style.color = kleur;
-    speelbaar = false;
+    gewonnen = true;
 }
+
 
