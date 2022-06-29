@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- instellingen van de webpagina -->
     <link rel="stylesheet" href="./style.css">
     <title>ConnectFour</title>
     <meta charset="UTF-8">
@@ -9,9 +10,9 @@
 </head>
 <body>
   <H1>Connect-Four</H1>
-  
   <div id="inloggen">
     <h2>Maak een keuze</h2>
+    <!-- Een tabel die gebruikt wordt als spelers instellen -->
     <table class="spelers">
         <th>Player 1</th>
         <th>Player 2</th>
@@ -31,6 +32,7 @@
         <td id="hard1" type="button" onclick="spelerInstellen('hard1','hard',1)">hard</td>
         <td id="hard2" type="button" onclick="spelerInstellen('hard2','hard',2)">hard</td>
       </tr>
+      <!-- knop op keuzes te bevestigen en door te gaan naar het spel -->
       <button id="bevestig" type="button" onclick="confirm()">confirm</button>
     </table>
   </div>
@@ -38,6 +40,7 @@
 
   <div id="spelen">
     <h2 id="gewonnen"></h2>
+    <!-- tabel die gebruikt wordt als speelveeld 6 rijen en 7 kolommen -->
     <table class="speelveld">
       <tr>
         <td id="11"></td><td id="12"></tdr><td id="13"></td><td id="14"></td>
@@ -64,6 +67,7 @@
         <td id="65"></td><td id="66"></td><td id="67"></td>
       </tr>
       <tr>
+        <!-- knoppen in de tabel zijn bedoeld om voor die bovenstaande kolom te kiezen -->
         <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(0)">1</button></td>
         <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(1)">2</button></td>
         <td style="background:blue;"><button class = "keuze" type="button" onclick="plekInkleuren(2)">3</button></td>
@@ -74,12 +78,14 @@
       </tr>
     </table>
     <div class="players">
+      <!-- geef de twee spelers aan in beeld :in praktijk wordt de actiefe speler ingekleurd -->
       <h2 id="player1">Player 1</h2>
       <h2 id="player2">Player 2</h2>
     </div>
+   <!-- knop voor het herstellen van het spel -->
     <button id="reset-knop" type="button" onclick="speelVeldLegen()">RESET</button>
   </div>
-
+  <!-- link naar de code die gebruikt wordt in de applicatie -->
   <script src="./script.js"></script>
 
 </body>
