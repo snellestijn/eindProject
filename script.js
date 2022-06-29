@@ -1,3 +1,5 @@
+// Copyright [2022] [Stijn Beekelaar] 
+
 
 // sde twee spelers en hun type+status
 let speler1 = ["persoon",false]; // type , aanDeBeurt
